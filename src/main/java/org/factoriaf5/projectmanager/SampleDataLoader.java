@@ -19,8 +19,7 @@ public class SampleDataLoader {
         this.personRepository = personRepository;
         this.projectRepository = projectRepository;
     }
-
-
+    
     @PostConstruct
     private void loadSampleData() {
         var p1 = personRepository.save(person("Pepa", "Díaz", "pepadiaz@example.com"));
@@ -34,8 +33,6 @@ public class SampleDataLoader {
                 project("Particle Accelerator", 10000, p1, Set.of(p3,p4)),
                 project("International Space Station", 800000, p2, Set.of(p5, p6))
         ));
-
-
     }
 
     private Project project(String name, int budget, Person manager, Set<Person> team) {
