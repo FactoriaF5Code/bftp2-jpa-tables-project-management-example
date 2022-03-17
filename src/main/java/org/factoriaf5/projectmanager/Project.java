@@ -1,6 +1,7 @@
 package org.factoriaf5.projectmanager;
 
 import javax.persistence.*;
+import java.util.Set;
 
 @Entity
 @Table(name = "projects")
@@ -14,6 +15,9 @@ public class Project {
 
     @OneToOne
     private Person manager;
+
+    @OneToMany
+    private Set<Person> team;
 
     public String getName() {
         return name;
@@ -45,5 +49,13 @@ public class Project {
 
     public void setManager(Person manager) {
         this.manager = manager;
+    }
+
+    public Set<Person> getTeam() {
+        return team;
+    }
+
+    public void setTeam(Set<Person> team) {
+        this.team = team;
     }
 }
