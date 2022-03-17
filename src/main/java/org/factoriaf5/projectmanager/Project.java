@@ -9,9 +9,11 @@ public class Project {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-
     private String name;
     private int budgetInMillions;
+
+    @OneToOne
+    private Person manager;
 
     public String getName() {
         return name;
@@ -35,5 +37,13 @@ public class Project {
 
     public void setBudgetInMillions(int budgetInMillions) {
         this.budgetInMillions = budgetInMillions;
+    }
+
+    public Person getManager() {
+        return manager;
+    }
+
+    public void setManager(Person manager) {
+        this.manager = manager;
     }
 }

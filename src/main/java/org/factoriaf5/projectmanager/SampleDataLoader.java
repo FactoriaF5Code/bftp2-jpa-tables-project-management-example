@@ -22,23 +22,22 @@ public class SampleDataLoader {
 
     @PostConstruct
     private void loadSampleData() {
-        personRepository.saveAll(List.of(
-                person("Pepa", "Díaz", "pepadiaz@example.com"),
-                person("Rosa", "Pérez", "rosaperez@example.com")
-        ));
+        var p1 = personRepository.save(person("Pepa", "Díaz", "pepadiaz@example.com"));
+        var p2 = personRepository.save(person("Rosa", "Pérez", "rosaperez@example.com"));
 
         projectRepository.saveAll(List.of(
-                project("Particle Accelerator", 10000),
-                project("International Space Station", 800000)
+                project("Particle Accelerator", 10000, p1),
+                project("International Space Station", 800000, p2)
         ));
 
 
     }
 
-    private Project project(String name, int budget) {
+    private Project project(String name, int budget, Person manager) {
         var p = new Project();
         p.setName(name);
         p.setBudgetInMillions(budget);
+        p.setManager(manager);
         return p;
     }
 
