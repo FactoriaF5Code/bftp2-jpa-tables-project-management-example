@@ -1,5 +1,7 @@
 package org.factoriaf5.projectmanager;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import javax.persistence.*;
 
 @Entity
@@ -13,6 +15,10 @@ public class Person {
     private String firstName;
     private String lastName;
     private String email;
+
+
+    @ManyToOne
+    private Project project;
 
     public Long getId() {
         return id;
@@ -44,5 +50,14 @@ public class Person {
 
     public void setEmail(String email) {
         this.email = email;
+    }
+
+    @JsonIgnore
+    public Project getProject() {
+        return project;
+    }
+
+    public void setProject(Project project) {
+        this.project = project;
     }
 }

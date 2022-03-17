@@ -1,9 +1,7 @@
 package org.factoriaf5.projectmanager;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -21,5 +19,14 @@ public class PersonController {
     @GetMapping
     List<Person> allPersons() {
         return personRepository.findAll();
+    }
+
+    @DeleteMapping("/{id}")
+    public void deletePersonById(@PathVariable Long id) {
+        var person = personRepository.findById(id)
+                .orElseThrow(PersonNotFoundException::new);
+
+        person.getProject().removeTeamMember(person);
+        personRepository.delete(person);
     }
 }

@@ -16,8 +16,9 @@ public class Project {
     @OneToOne
     private Person manager;
 
-    @OneToMany
+    @OneToMany(mappedBy = "project", cascade = CascadeType.ALL, orphanRemoval = true)
     private Set<Person> team;
+
 
     public String getName() {
         return name;
@@ -57,5 +58,9 @@ public class Project {
 
     public void setTeam(Set<Person> team) {
         this.team = team;
+    }
+
+    public void removeTeamMember(Person person) {
+        team.remove(person);
     }
 }
